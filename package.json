@@ -1,0 +1,134 @@
+{
+  "name": "rfi-react-app",
+  "version": "0.1.1",
+  "private": true,
+  "jest": {
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!@shotgunjed)/"
+    ]
+  },
+  "dependencies": {
+    "@date-io/date-fns": "^1.3.13",
+    "@emotion/react": "^11.7.1",
+    "@material-ui/core": "^4.12.3",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/pickers": "^3.2.10",
+    "@mui/lab": "^5.0.0-alpha.64",
+    "@mui/material": "^5.2.8",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/user-event": "^7.2.1",
+    "@uopx/core": "1.0.14",
+    "@uopx/styles": "1.0.3",
+    "axios": "^0.22.0",
+    "body-parser": "^1.19.0",
+    "classnames": "^2.2.6",
+    "date-and-time": "^0.14.1",
+    "date-fns": "^2.9.0",
+    "date-fns-tz": "^1.2.2",
+    "dotenv": "^10.0.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
+    "esm": "^3.2.25",
+    "formik": "^2.1.5",
+    "formik-error-focus": "^1.1.0",
+    "history": "^5.0.0",
+    "lodash": "^4.17.15",
+    "material-ui-phone-number": "^2.2.6",
+    "moment": "^2.24.0",
+    "node-fetch": "^2.6.1",
+    "nodemailer": "^6.6.3",
+    "postcss": "^8.2.10",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-cookie": "^4.0.3",
+    "react-datepicker": "^4.6.0",
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^5.0.0",
+    "xml2json-light": "^1.0.6",
+    "yup": "^0.28.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.0",
+    "@babel/core": "^7.10.0",
+    "@babel/preset-react": "^7.10.0",
+    "@mdx-js/loader": "^1.6.5",
+    "babel-eslint": "^10.1.0",
+    "babel-jest": "^24.9.0",
+    "babel-loader": "^8.1.0",
+    "babel-plugin-macros": "^2.8.0",
+    "cross-env": "^7.0.2",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.1.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-import": "^2.21.1",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-react": "^7.20.0",
+    "eslint-plugin-react-hooks": "^4.0.4",
+    "eslint-plugin-you-dont-need-lodash-underscore": "^6.10.0",
+    "file-loader": "^6.0.0",
+    "husky": "^4.2.5",
+    "identity-obj-proxy": "^3.0.0",
+    "jest-extended": "^0.11.5",
+    "jest-transform-css": "^2.0.0",
+    "lint-staged": "^10.2.11",
+    "node-sass": "^4.14.1",
+    "react-hot-loader": "^4.12.21",
+    "react-test-renderer": "^17.0.2",
+    "require-context.macro": "^1.2.2",
+    "rimraf": "^3.0.2",
+    "sass": "^1.26.10",
+    "sass-loader": "^8.0.2",
+    "style-loader": "^1.2.1",
+    "stylelint": "^13.6.1",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-scss": "^3.18.0",
+    "webpack": "4.42.0"
+  },
+  "peerDependencies": {
+    "node-sass": "^4.14.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "test-silent": "react-scripts test --silent",
+    "eject": "react-scripts eject",
+    "lint-js": "eslint src/**/*.js --fix",
+    "lint-jsx": "eslint src/**/*.jsx --fix",
+    "lint-scss": "stylelint src/**/*.scss --fix",
+    "deploy": "node ./server",
+    "prepare": "npx husky install"
+  },
+  "proxy": "https://www.phoenix.edu",
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "lint-staged": {
+    "src/**/*{json,css,scss,less}": [
+      "stylelint --fix",
+      "git add"
+    ],
+    "src/**/*{js,jsx}": [
+      "eslint --fix",
+      "git add"
+    ]
+  }
+}

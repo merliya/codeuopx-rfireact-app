@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: rfi-react-app
+    version: v1
+  name: rfi-react-app-v1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: rfi-react-app
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: rfi-react-app
+        version: v1
+    spec:
+      containers:
+      - image: 050853773894.dkr.ecr.us-east-1.amazonaws.com/rfi-react-app:0.0.0.1
+        name: rfi-react-app
+        ports:
+        - containerPort: 80
+          name: server
+          protocol: TCP
+        resources: {}
+status: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rfi-react-app
+  labels:
+    app: rfi-react-app
+    service: rfi-react-app
+spec:
+  ports:
+  - port: 80
+    name: http
+  selector:
+    app: rfi-react-app
+
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: rfi-react-app-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: rfi-react-app-v1
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
+
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: rfi-react-app
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - istio-system/ms-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        # service.namespace.svc.cluster.local
+        host: rfi-react-app.rfi-react-app.svc.cluster.local
+        port:
+          number: 80

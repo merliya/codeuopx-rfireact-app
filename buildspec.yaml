@@ -1,0 +1,19 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - $(aws ecr get-login --no-include-email --region $AWS_REGION)
+      - export CODEARTIFACT_AUTH_TOKEN=`aws codeartifact get-authorization-token --domain uop-domain --domain-owner $AWS_ACCOUNT --query authorizationToken --output text`
+      - PROJECT_VERSION=$PACKAGE_VERSION.$CODEBUILD_BUILD_NUMBER$VERSION_SUFFIX
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...
+      - docker build -t $AWS_ACCOUNT.dkr.ecr.$AWS_REGION.amazonaws.com/rfi-react-app:$PROJECT_VERSION --build-arg CODEARTIFACT_AUTH_TOKEN=$CODEARTIFACT_AUTH_TOKEN --build-arg AWS_ACCOUNT=$AWS_ACCOUNT --build-arg AWS_REGION=$AWS_REGION .
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      - docker push $AWS_ACCOUNT.dkr.ecr.$AWS_REGION.amazonaws.com/rfi-react-app:$PROJECT_VERSION

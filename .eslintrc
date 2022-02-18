@@ -1,0 +1,52 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest": true
+  },
+  "plugins": [
+    "jsx-a11y"
+  ],
+  "extends": [
+    "airbnb",
+    "plugin:jsx-a11y/recommended",
+    "plugin:you-dont-need-lodash-underscore/compatible"
+  ],
+  "parser": "babel-eslint",
+  "rules": {
+    "no-console": "off",
+    "arrow-parens": [
+      "warn",
+      "as-needed"
+    ],
+    "react/jsx-props-no-spreading": [
+      "error",
+      {
+        "html": "enforce",
+        "custom": "ignore",
+        "explicitSpread": "enforce",
+        "exceptions": [
+          "div"
+        ]
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "*.stories.js",
+        "*.stories.jsx",
+        "*.test.js",
+        "*.test.jsx"
+      ],
+      "rules": {
+        "import/no-extraneous-dependencies": [
+          "error",
+          {
+            "devDependencies": true
+          }
+        ]
+      }
+    }
+  ]
+}
